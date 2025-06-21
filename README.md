@@ -1,2 +1,1 @@
-# spinup
-Instantly spin up dev environments
+This is a basic Flask web app that serves a single route.
