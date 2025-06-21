@@ -1,19 +1,26 @@
-# Development Container
+# Development Container Setup
 
-This project uses a Docker-based development environment configured for a Flask application.
+This repository includes configuration files for running the Flask application inside a VS Code Dev Container or GitHub Codespace.
 
-## Base Image Choice
-The container is built from `python:3.11-slim` to provide a lightweight Python runtime suitable for running Flask with Gunicorn.
+## Base Image
+The container uses **python:3.11-slim** providing a minimal runtime with the latest Python features.
 
-## VS Code Extensions
-- **ms-python.python**: Provides Python language support, linting and debugging features.
+## Exposed Port
+The app listens on port **5000**, so this port is forwarded automatically.
 
-## Container Startup
-When started, the container installs dependencies and launches the application using Gunicorn bound to port `5000`.
+## Installed Extensions
+- `ms-python.python` – Python language support and debugging tools.
 
-## Using this Environment
-1. Open this repository in VS Code and choose **Reopen in Container** (or open in GitHub Codespaces).
-2. VS Code will build the Dockerfile and set up the environment.
-3. Once running, the Flask app will be available on port 5000.
+## Container Commands
+Dependencies are installed with `pip install -r requirements.txt` during image build and again after creation to ensure they are up to date. The service is started via:
 
-Use this environment for consistent development across machines or when working in Codespaces.
+```bash
+gunicorn -b 0.0.0.0:5000 app.main:app
+```
+
+## Getting Started
+1. Open this repository in VS Code and choose **Reopen in Container** (or create a Codespace).
+2. Wait for the build to finish; dependencies will be installed automatically.
+3. Access the running Flask application at `http://localhost:5000`.
+
+Use this environment for consistent, reproducible development.
